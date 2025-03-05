@@ -79,7 +79,7 @@ int check_day(std::string mounth, std::string day,std::string year)
     return 0;
 }
 
-int check_date(std::string line)
+int check_date(std::string line, int *flag)
 {
     int x = 0;
     for(int i = 0; line[i]; i++)
@@ -99,17 +99,23 @@ int check_date(std::string line)
 
     if(check_year(date[0]) || check_mounth(date[1]) || check_day(date[1], date[2], date[0]))
         return 1;
-
-    // std::cout << "Year: " << date[0] << "\t";
-    // std::cout << "Month: " << date[1] << "\t";
-    // std::cout << "Day: " << date[2] << "\n";
-
+    if(date[0] > "2022" || (date[0] == "2022" && date[1] > "03") ||(date[0] == "2022" && date[1] == "03" && date[2] > "29"))
+        *flag = 2;
+    else if(date[0] < "2009"  ||(date[0] == "2009" && date[1] == "01" && date[2] < "02"))
+        *flag = 1;
+    else
+        *flag = 0;
     return 0;
 }
 
 int check_value(std::string line, double *value)
 {
     int x = 0;
+    if(line.empty())
+    {
+        std ::cout << "Eroor: bad input" << std::endl;
+        return 1;
+    }
     for(int i = 0; line[i]; i++)
     {
         if(line[i] == '.')
@@ -128,6 +134,11 @@ int check_value(std::string line, double *value)
     int i = 0;
     if(line[i] == '+' || line[i] == '-')
         i++;
+    if((line[0] == '+' || line[0] == '-') && line.length() == 1)
+    {
+        std::cout << "Error: bad number" << std::endl;   
+        return 1;
+    }
     for(;line[i]; i++)
     {
         if(!isdigit(line[i]) && line[i] != '.')
@@ -135,6 +146,11 @@ int check_value(std::string line, double *value)
             std::cout << "Error: bad number" << std::endl;   
             return 1;
         }
+        if(line[i] == '.' && !isdigit(line[i - 1]))
+        {
+            std::cout << "Error: bad number" << std::endl;   
+            return 1;
+        }  
      }
     double d = std::strtod(line.c_str(), NULL);
     if(d < 0)
