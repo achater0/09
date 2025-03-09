@@ -78,7 +78,7 @@ int main(int ac, char **av)
         {
             std::map<std::string, std::string>::iterator it = data.lower_bound(input[0]);
             if(input[0] != it->first)
-                *it--;
+                it--;
             double d = std::strtod(it->second.c_str(), NULL);
             double x = d * value;
             std::cout << input[0]<< " => " << value << " = " <<  x <<std ::endl;

@@ -24,7 +24,7 @@ int check(char *s)
     }
     if(n != (o + 1))
         return 1;
-    if(n < 2)
-        return 1;
+    // if(n < 2)
+    //     return 1;
     return 0;
 }
