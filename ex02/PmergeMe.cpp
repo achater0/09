@@ -12,11 +12,11 @@ int check(std::string s)
     return 0;
 }
 
-std::vector<std::pair<int,int>> merge_sort(std::vector<std::pair<int,int>> pairs)
+std::vector<std::pair<int,int> > merge_sort(std::vector<std::pair<int,int> > pairs)
 {
-    std::vector<std::pair<int,int>> right;
-    std::vector<std::pair<int,int>> left;
-    std::vector<std::pair<int,int>> res;
+    std::vector<std::pair<int,int> > right;
+    std::vector<std::pair<int,int> > left;
+    std::vector<std::pair<int,int> > res;
 
     size_t i = 0;
     for(;i < pairs.size() / 2; i++)
@@ -37,22 +37,22 @@ std::vector<std::pair<int,int>> merge_sort(std::vector<std::pair<int,int>> pairs
     {
         if(x == left.size())
         {
-            res.emplace_back(right[y].first,right[y].second);
+            res.push_back(std::make_pair(right[y].first, right[y].second));
             y++;
         }
         else if(y == right.size())
         {
-            res.emplace_back(left[x].first,left[x].second);
+            res.push_back(std::make_pair(left[x].first, left[x].second));
             x++;
         }
         else if(left[x].second <= right[y].second )
         {
-            res.emplace_back(left[x].first,left[x].second);
+            res.push_back(std::make_pair(left[x].first, left[x].second));
             x++;
         }
         else
         {
-            res.emplace_back(right[y].first,right[y].second);
+            res.push_back(std::make_pair(right[y].first, right[y].second));
             y++;
         }
     }
@@ -98,13 +98,13 @@ void sort_vec(std::vector<int> v)
         v.pop_back();
     }
         // x = v[v.size() - 1];/
-    std::vector<std::pair<int,int>> pairs;
+    std::vector<std::pair<int,int> > pairs;
     for(size_t i = 0; i + 1 < v.size(); i += 2)
     {
         if(v[i + 1] > v[i])
-        pairs.emplace_back(v[i], v[i + 1]);
+            pairs.push_back(std::make_pair(v[i], v[i + 1]));
         else
-        pairs.emplace_back(v[i + 1], v[i]);
+            pairs.push_back(std::make_pair(v[i + 1], v[i]));
     }
     pairs = merge_sort(pairs);
 
@@ -122,15 +122,15 @@ void sort_vec(std::vector<int> v)
         main.push_back(pairs[i].second);
         pend.push_back(pairs[i].first);
     }
-    // std::cout << pend.size() << std::endl;
     std::vector<int> jacob = jacob_generate(pend.size());
-    for(int i = 0; i < pend.size();i++)
+    int y = 0;
+    for(int i = 0; y < pend.size();i++)
     {
         if (jacob[i] >= (int)pend.size())
             continue;
         std::vector<int>::iterator pos = std::lower_bound(main.begin(), main.end(), pend[jacob[i]]);
         main.insert(pos,pend[jacob[i]]);
-
+        y++;
     }
     // for(size_t i = 0; i < pend.size(); i++)
     // {
@@ -140,15 +140,15 @@ void sort_vec(std::vector<int> v)
     if(x != -1)
     {
         std::vector<int>::iterator pos = std::lower_bound(main.begin(), main.end(), x);
-        main.insert(pos, x);       
+        main.insert(pos, x);
     }
 
     for(size_t i = 0; i < main.size(); i++)
     {
-        std::cout << main[i] << std::endl;    
+        std::cout << main[i] << std::endl;
     }
     // for(size_t i = 0; i < jacob.size(); i++)
     // {
-    //     std::cout << jacob[i] << std::endl;    
+    //     std::cout << jacob[i] << std::endl;
     // }
 }
