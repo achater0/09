@@ -5,6 +5,7 @@
 #include <iostream>
 #include <fstream>
 #include <map>
+#include <cstdlib>
 
 
 int check_pipe(std::string line);

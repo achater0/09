@@ -9,10 +9,15 @@
 #include <deque>
 #include <cmath>
 #include <utility> 
+#include <cstdlib>
+#include <ctime>
+
 
 int check(std::string s);
 
-void sort_vec(std::vector<int> v);
+std::vector<int> sort_vec(std::vector<int> v);
+
+std::deque<int> sort_deque(std::deque<int> v);
 
 
 #endif
