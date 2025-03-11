@@ -12,7 +12,7 @@ int main(int ac,char **av)
         std::cerr << "Error" << std::endl;
         return 1;
     }
-    std::stack<int> s;
+    std::stack<float> s;
 
     for(int i =0; av[1][i]; i++)
     {
@@ -28,10 +28,10 @@ int main(int ac,char **av)
                 std::cerr << "Error" << std::endl;
                 return 1;
             }
-            int a = s.top();
+            float a = s.top();
             s.pop();
-            int b = s.top();
-            int res;
+            float b = s.top();
+            float res;
             s.pop();
             if(av[1][i] == '/' && a == 0)
             {
