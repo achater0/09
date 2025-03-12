@@ -73,7 +73,7 @@ int main(int ac, char **av)
             std::cout << input[0]<< " => " << value << " = " <<  f<<std ::endl;
         }
         else if(flag == 1)
-            std::cout << input[0]<< " => " << value << " = " <<  0 <<std ::endl;
+            std::cout <<"Error: Bitcoin not exist" << std::endl;
         else
         {
             std::map<std::string, std::string>::iterator it = data.lower_bound(input[0]);
